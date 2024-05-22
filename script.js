@@ -3,6 +3,7 @@ let second;
 let result = 0;
 let operator;
 let operationKeysPressedState = false;
+let eqKey = false;
 
 function add (first, second) {
     return first + second;
@@ -28,10 +29,23 @@ function operate (operator, first, second) {
 let display = document.querySelector(".displ");
 
 let ac = document.querySelector(".ac");
-ac.addEventListener("click", () => display.textContent = "");
+ac.addEventListener("click", () => {
+    display.textContent = "";
+    first = 0;
+    second = 0;
+});
+
+// Number Keys
 
 let naught = document.querySelector(".naught");
-naught.addEventListener("click", () => display.textContent = display.textContent + "0");
+naught.addEventListener("click", () => {
+    display.textContent = display.textContent + "0";
+    if (operationKeysPressedState) {
+        display.textContent = "";
+        display.textContent = display.textContent + "0";
+        operationKeysPressedState = false;
+    }
+});
 
 let one = document.querySelector(".one");
 one.addEventListener("click", () => {
@@ -126,12 +140,23 @@ nine.addEventListener("click", () => {
 let dot = document.querySelector(".dot");
 dot.addEventListener("click", () => display.textContent = display.textContent + ".");
 
+// Operation Keys
+
 let addition = document.querySelector(".additioning");
 addition.addEventListener("click", () => {
+    if (eqKey === true) {
+        second = display.textContent;
+        second = +second;
+        result = operate(operator, first, second);
+        display.textContent = result.toString();
+        eqKey = false;
+        first = display.textContent;
+        first = +first;
+    }
     first = display.textContent;
     first = +first;
     operator = add;
-    console.log("Hey dude");
+    eqKey = true;
     operationKeysPressedState = true;
 });
 
@@ -139,17 +164,11 @@ let equal = document.querySelector(".equalizating");
 equal.addEventListener("click", () => {
     second = display.textContent;
     second = +second;
-    result = operate(operator, first, second);
-    display.textContent = result.toString();
+    if (operator != undefined) {
+        result = operate(operator, first, second);
+        display.textContent = result.toString();
+    }
+    eqKey = false;
+    first = 0;
+    second = 0;
 });
-
-/* Lo que vamos a añadir en las próximas sesiones de programación y cómo hacerlo:
-        1.- El CSS no está realmente acabado, tenemos que modificar el cursor tipo de texto y evitar que el subrayado del texto ocurra.
-        2.- La lógica real de la calculadora es sencilla, vemos ahora una especie de diagrama explicando qué es lo que ocurre
-                2.1.- Vamos poniendo un valor en el display, en cuanto pulsamos una tecla de operación se almacena el contenido en la primera variable.
-                2.2.- Se borra por completo el display al pulsar la tecla de operación.
-                2.3.- Seguimos poniendo valores en el display, en cuanto pulsemos la tecla ifual se almacena el contenido en la segunda variable.
-                2.4.- Acto seguido se opera con los valores operator, first y second y obtenemos el resultado que lo almacenaremos en el display.
-        3.- Mantener los nombres legibles y programar un código que sea completamente un código que se auto explique y además que sea precioso.
-        4.- Recordemos pasar los valores de first y second a typeof number siempre.
-*/
