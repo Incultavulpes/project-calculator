@@ -18,6 +18,9 @@ function multiply (first, second) {
 }
 
 function divide (first, second) {
+    if (second === 0) {
+        return "Can't divide by zero";
+    }
     return first / second;
 }
 
@@ -31,6 +34,8 @@ let display = document.querySelector(".displ");
 let ac = document.querySelector(".ac");
 ac.addEventListener("click", () => {
     display.textContent = "";
+    operationKeysPressedState = false;
+    eqKey = false;
     first = 0;
     second = 0;
 });
@@ -160,11 +165,65 @@ addition.addEventListener("click", () => {
     operationKeysPressedState = true;
 });
 
+let substraction = document.querySelector(".substracting");
+substraction.addEventListener("click", () => {
+    if (eqKey === true) {
+        second = display.textContent;
+        second = +second;
+        result = operate(operator, first, second);
+        display.textContent = result.toString();
+        eqKey = false;
+        first = display.textContent;
+        first = +first;
+    }
+    first = display.textContent;
+    first = +first;
+    operator = substract;
+    eqKey = true;
+    operationKeysPressedState = true;
+});
+
+let multiplication = document.querySelector(".timesing");
+multiplication.addEventListener("click", () => {
+    if (eqKey === true) {
+        second = display.textContent;
+        second = +second;
+        result = operate(operator, first, second);
+        display.textContent = result.toString();
+        eqKey = false;
+        first = display.textContent;
+        first = +first;
+    }
+    first = display.textContent;
+    first = +first;
+    operator = multiply;
+    eqKey = true;
+    operationKeysPressedState = true;
+});
+
+let partition = document.querySelector(".dividing");
+partition.addEventListener("click", () => {
+    if (eqKey === true) {
+        second = display.textContent;
+        second = +second;
+        result = operate(operator, first, second);
+        display.textContent = result.toString();
+        eqKey = false;
+        first = display.textContent;
+        first = +first;
+    }
+    first = display.textContent;
+    first = +first;
+    operator = divide;
+    eqKey = true;
+    operationKeysPressedState = true;
+});
+
 let equal = document.querySelector(".equalizating");
 equal.addEventListener("click", () => {
     second = display.textContent;
     second = +second;
-    if (operator != undefined) {
+    if (operator != undefined && eqKey === true) {
         result = operate(operator, first, second);
         display.textContent = result.toString();
     }
