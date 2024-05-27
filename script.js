@@ -143,7 +143,12 @@ nine.addEventListener("click", () => {
 });
 
 let dot = document.querySelector(".dot");
-dot.addEventListener("click", () => display.textContent = display.textContent + ".");
+dot.addEventListener("click", () => {
+    const stop = display.textContent.includes(".");
+    if (!stop) {
+        display.textContent = display.textContent + ".";
+    }
+});
 
 // Operation Keys
 
@@ -230,4 +235,9 @@ equal.addEventListener("click", () => {
     eqKey = false;
     first = 0;
     second = 0;
+});
+
+let docu = document.querySelector("body");
+docu.addEventListener("keydown", (e) => {
+    console.log(e.code);
 });
