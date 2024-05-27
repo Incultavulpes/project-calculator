@@ -240,4 +240,7 @@ equal.addEventListener("click", () => {
 let docu = document.querySelector("body");
 docu.addEventListener("keydown", (e) => {
     console.log(e.code);
+    if (e.code == "Digit 1") {
+        console.log("Digit One");
+    }
 });
