@@ -269,11 +269,14 @@ docu.addEventListener("keydown", (e) => {
 
 docu.addEventListener("keydown", (e) => {
     console.log(e.code);
+    onkeydown(e);
 });
 
 const onkeydown = onkeyup = function(e){
     map[e.code] = e.type == 'keydown';
-    /* insert conditional here */
+    if (map["RightShift"] && map["BracketRight"]) {
+        console.log("Yes sir");
+    }
 }
 
 /* Ahora acabamos con el link de lo que vamos a visitar el próximo día, lo necesitamos para registrar Shift + *, es una de las posibles soluciones
