@@ -4,6 +4,7 @@ let result = 0;
 let operator;
 let operationKeysPressedState = false;
 let eqKey = false;
+let map = {}; // This is part of a temporal solution
 
 function add (first, second) {
     return first + second;
@@ -239,8 +240,44 @@ equal.addEventListener("click", () => {
 
 let docu = document.querySelector("body");
 docu.addEventListener("keydown", (e) => {
-    console.log(e.code);
-    if (e.code == "Digit 1") {
-        console.log("Digit One");
+    if (e.code == "Digit1") {
+        one.click();
+    } else if (e.code == "Digit2") {
+        two.click();
+    } else if (e.code == "Digit3") {
+        three.click();
+    } else if (e.code == "Digit4") {
+        four.click();
+    } else if (e.code == "Digit5") {
+        five.click();
+    } else if (e.code == "Digit6") {
+        six.click();
+    } else if (e.code == "Digit7") {
+        seven.click();
+    } else if (e.code == "Digit8") {
+        eight.click();
+    } else if (e.code == "Digit9") {
+        nine.click();
+    } else if (e.code == "Digit0") {
+        naught.click();
+    } else if (e.code == "BracketRight") {
+        addition.click();
+    } else if (e.code == "Slash") {
+        substraction.click();
     }
 });
+
+docu.addEventListener("keydown", (e) => {
+    console.log(e.code);
+});
+
+const onkeydown = onkeyup = function(e){
+    map[e.code] = e.type == 'keydown';
+    /* insert conditional here */
+}
+
+/* Ahora acabamos con el link de lo que vamos a visitar el próximo día, lo necesitamos para registrar Shift + *, es una de las posibles soluciones
+
+        - LINK: https://stackoverflow.com/questions/5203407/how-to-detect-if-multiple-keys-are-pressed-at-once-using-javascript
+   Ya solo nos queda seguir este link, e ir a la segunda opción y escribirla para que pase a ser la buena solución       
+*/
