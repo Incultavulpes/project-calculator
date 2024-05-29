@@ -4,7 +4,6 @@ let result = 0;
 let operator;
 let operationKeysPressedState = false;
 let eqKey = false;
-let map = {}; // This is part of a temporal solution
 
 function add (first, second) {
     return first + second;
@@ -252,7 +251,7 @@ docu.addEventListener("keydown", (e) => {
         five.click();
     } else if (e.code == "Digit6") {
         six.click();
-    } else if (e.code == "Digit7") {
+    } else if (e.code == "Digit7" && e.shiftKey === false) {
         seven.click();
     } else if (e.code == "Digit8") {
         eight.click();
@@ -260,18 +259,36 @@ docu.addEventListener("keydown", (e) => {
         nine.click();
     } else if (e.code == "Digit0") {
         naught.click();
-    } else if (e.code == "BracketRight") {
+    } else if (e.code == "BracketRight" && e.shiftKey === false) {
         addition.click();
     } else if (e.code == "Slash") {
         substraction.click();
+    } else if (e.code === "BracketRight" && e.shiftKey === true) {
+        multiplication.click();
+    } else if (e.code === "Digit7" && e.shiftKey === true) {
+        partition.click();
+    } else if (e.code == "Enter") {
+        equal.click();
+    } else if (e.code == "Escape") {
+        ac.click();
+    } else if (e.code == "Period") {
+        dot.click();
+    } else if (e.code == "Backspace") {
+        display.textContent = obfuscate();
     }
 });
 
 docu.addEventListener("keydown", (e) => {
-    console.log(e.code);
-    onkeydown(e);
+    console.log(`${e.code} and the key was pressed ${e.shiftKey}`);
+    if (e.code === "BracketRight" && e.shiftKey === true) {
+        console.log("Here it works sheise");
+    }
+    // onkeydown(e);
 });
 
+/*
+
+let map = {};
 const onkeydown = onkeyup = function(e){
     map[e.code] = e.type == 'keydown';
     if (map["RightShift"] && map["BracketRight"]) {
@@ -279,8 +296,10 @@ const onkeydown = onkeyup = function(e){
     }
 }
 
-/* Ahora acabamos con el link de lo que vamos a visitar el próximo día, lo necesitamos para registrar Shift + *, es una de las posibles soluciones
-
-        - LINK: https://stackoverflow.com/questions/5203407/how-to-detect-if-multiple-keys-are-pressed-at-once-using-javascript
-   Ya solo nos queda seguir este link, e ir a la segunda opción y escribirla para que pase a ser la buena solución       
 */
+
+function obfuscate () {
+    let content = display.textContent;
+    content = content.slice(0, content.length - 1);
+    return content;
+}
