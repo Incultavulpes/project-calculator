@@ -36,6 +36,9 @@ body {
     border: 2px solid black;
     background-color: white;
     margin-bottom: 10px;
+    text-align: right;
+    line-height: 40px;
+    font-size: 40px;
 }
 
 .calc .center .content {

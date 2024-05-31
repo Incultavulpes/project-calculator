@@ -44,102 +44,52 @@ ac.addEventListener("click", () => {
 
 let naught = document.querySelector(".naught");
 naught.addEventListener("click", () => {
-    display.textContent = display.textContent + "0";
-    if (operationKeysPressedState) {
-        display.textContent = "";
-        display.textContent = display.textContent + "0";
-        operationKeysPressedState = false;
-    }
+    displayContent("0");
 });
 
 let one = document.querySelector(".one");
 one.addEventListener("click", () => {
-    display.textContent = display.textContent + "1";
-    if (operationKeysPressedState) {
-        display.textContent = "";
-        display.textContent = display.textContent + "1";
-        operationKeysPressedState = false;
-    }
+    displayContent("1");
 });
 
 let two = document.querySelector(".two");
 two.addEventListener("click", () => {
-    display.textContent = display.textContent + "2";
-    if (operationKeysPressedState) {
-        display.textContent = "";
-        display.textContent = display.textContent + "2";
-        operationKeysPressedState = false;
-    }
+    displayContent("2");
 });
 
 let three = document.querySelector(".three");
 three.addEventListener("click", () => {
-    display.textContent = display.textContent + "3";
-    if (operationKeysPressedState) {
-        display.textContent = "";
-        display.textContent = display.textContent + "3";
-        operationKeysPressedState = false;
-    }
+    displayContent("3");
 });
 
 let four = document.querySelector(".four");
 four.addEventListener("click", () => {
-    display.textContent = display.textContent + "4";
-    if (operationKeysPressedState) {
-        display.textContent = "";
-        display.textContent = display.textContent + "4";
-        operationKeysPressedState = false;
-    }
+    displayContent("4");
 });
 
 let five = document.querySelector(".five");
 five.addEventListener("click", () => {
-    display.textContent = display.textContent + "5";
-    if (operationKeysPressedState) {
-        display.textContent = "";
-        display.textContent = display.textContent + "5";
-        operationKeysPressedState = false;
-    }
+    displayContent("5");
 });
 
 let six = document.querySelector(".six");
 six.addEventListener("click", () => {
-    display.textContent = display.textContent + "6";
-    if (operationKeysPressedState) {
-        display.textContent = "";
-        display.textContent = display.textContent + "6";
-        operationKeysPressedState = false;
-    }
+    displayContent("6");
 });
 
 let seven = document.querySelector(".seven");
 seven.addEventListener("click", () => {
-    display.textContent = display.textContent + "7";
-    if (operationKeysPressedState) {
-        display.textContent = "";
-        display.textContent = display.textContent + "7";
-        operationKeysPressedState = false;
-    }
+    displayContent("7");
 });
 
 let eight = document.querySelector(".eight");
 eight.addEventListener("click", () => {
-    display.textContent = display.textContent + "8";
-    if (operationKeysPressedState) {
-        display.textContent = "";
-        display.textContent = display.textContent + "8";
-        operationKeysPressedState = false;
-    }
+    displayContent("8");
 });
 
 let nine = document.querySelector(".nine");
 nine.addEventListener("click", () => {
-    display.textContent = display.textContent + "9";
-    if (operationKeysPressedState) {
-        display.textContent = "";
-        display.textContent = display.textContent + "9";
-        operationKeysPressedState = false;
-    }
+    displayContent("9");
 });
 
 let dot = document.querySelector(".dot");
@@ -154,74 +104,22 @@ dot.addEventListener("click", () => {
 
 let addition = document.querySelector(".additioning");
 addition.addEventListener("click", () => {
-    if (eqKey === true) {
-        second = display.textContent;
-        second = +second;
-        result = operate(operator, first, second);
-        display.textContent = result.toString();
-        eqKey = false;
-        first = display.textContent;
-        first = +first;
-    }
-    first = display.textContent;
-    first = +first;
-    operator = add;
-    eqKey = true;
-    operationKeysPressedState = true;
+    calculator(add);
 });
 
 let substraction = document.querySelector(".substracting");
 substraction.addEventListener("click", () => {
-    if (eqKey === true) {
-        second = display.textContent;
-        second = +second;
-        result = operate(operator, first, second);
-        display.textContent = result.toString();
-        eqKey = false;
-        first = display.textContent;
-        first = +first;
-    }
-    first = display.textContent;
-    first = +first;
-    operator = substract;
-    eqKey = true;
-    operationKeysPressedState = true;
+    calculator(substract);
 });
 
 let multiplication = document.querySelector(".timesing");
 multiplication.addEventListener("click", () => {
-    if (eqKey === true) {
-        second = display.textContent;
-        second = +second;
-        result = operate(operator, first, second);
-        display.textContent = result.toString();
-        eqKey = false;
-        first = display.textContent;
-        first = +first;
-    }
-    first = display.textContent;
-    first = +first;
-    operator = multiply;
-    eqKey = true;
-    operationKeysPressedState = true;
+    calculator(multiply);
 });
 
 let partition = document.querySelector(".dividing");
 partition.addEventListener("click", () => {
-    if (eqKey === true) {
-        second = display.textContent;
-        second = +second;
-        result = operate(operator, first, second);
-        display.textContent = result.toString();
-        eqKey = false;
-        first = display.textContent;
-        first = +first;
-    }
-    first = display.textContent;
-    first = +first;
-    operator = divide;
-    eqKey = true;
-    operationKeysPressedState = true;
+    calculator(divide);
 });
 
 let equal = document.querySelector(".equalizating");
@@ -278,14 +176,6 @@ docu.addEventListener("keydown", (e) => {
     }
 });
 
-docu.addEventListener("keydown", (e) => {
-    console.log(`${e.code} and the key was pressed ${e.shiftKey}`);
-    if (e.code === "BracketRight" && e.shiftKey === true) {
-        console.log("Here it works sheise");
-    }
-    // onkeydown(e);
-});
-
 /*
 
 let map = {};
@@ -302,4 +192,30 @@ function obfuscate () {
     let content = display.textContent;
     content = content.slice(0, content.length - 1);
     return content;
+}
+
+function calculator (op) {
+    if (eqKey === true) {
+        second = display.textContent;
+        second = +second;
+        result = operate(operator, first, second);
+        display.textContent = result.toString();
+        eqKey = false;
+        first = display.textContent;
+        first = +first;
+    }
+    first = display.textContent;
+    first = +first;
+    operator = op;
+    eqKey = true;
+    operationKeysPressedState = true;
+}
+
+function displayContent (content) {
+    display.textContent = display.textContent + content;
+    if (operationKeysPressedState) {
+        display.textContent = "";
+        display.textContent = display.textContent + content;
+        operationKeysPressedState = false;
+    }
 }
