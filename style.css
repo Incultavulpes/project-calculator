@@ -84,6 +84,10 @@ body {
 .inputboard-left div:hover {
     background-color: white;
     color: black;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .inputboard-right div {
@@ -100,6 +104,10 @@ body {
 .inputboard-right div:hover {
     background-color: white;
     color: black;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .naught {

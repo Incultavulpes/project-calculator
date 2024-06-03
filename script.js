@@ -200,6 +200,17 @@ function calculator (op) {
         second = +second;
         result = operate(operator, first, second);
         display.textContent = result.toString();
+        /*
+        if (!isOverflown(display)) {
+            display.textContent = result.toString();
+        } else {
+            do {
+                size = display.style.fontSize.replace("px", "");
+                size = size - 10;
+                display.style.fontSize = `${size}px`;
+            } while (isOverflown(display));
+        }
+        */
         eqKey = false;
         first = display.textContent;
         first = +first;
@@ -212,10 +223,16 @@ function calculator (op) {
 }
 
 function displayContent (content) {
-    display.textContent = display.textContent + content;
-    if (operationKeysPressedState) {
-        display.textContent = "";
+    if (!isOverflown(display)) {
         display.textContent = display.textContent + content;
-        operationKeysPressedState = false;
+        if (operationKeysPressedState) {
+            display.textContent = "";
+            display.textContent = display.textContent + content;
+            operationKeysPressedState = false;
+        }
     }
+}
+
+function isOverflown (element) {
+    return element.scrollWidth > element.clientWidth;
 }
