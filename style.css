@@ -39,6 +39,7 @@ body {
     text-align: right;
     line-height: 40px;
     font-size: 40px;
+    overflow: hidden;
 }
 
 .calc .center .content {

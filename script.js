@@ -4,6 +4,7 @@ let result = 0;
 let operator;
 let operationKeysPressedState = false;
 let eqKey = false;
+let size;
 
 function add (first, second) {
     return first + second;
@@ -128,7 +129,16 @@ equal.addEventListener("click", () => {
     second = +second;
     if (operator != undefined && eqKey === true) {
         result = operate(operator, first, second);
-        display.textContent = result.toString();
+        if (!isOverflown(display)) {
+            display.textContent = result.toString();
+        } else {
+            do {
+                display.style.fontSize = "40px";
+                size = display.style.fontSize.replace("px", "");
+                size = size - 10;
+                display.style.fontSize = `${size}px`;
+            } while (isOverflown(display));
+        }
     }
     eqKey = false;
     first = 0;
@@ -199,18 +209,16 @@ function calculator (op) {
         second = display.textContent;
         second = +second;
         result = operate(operator, first, second);
-        display.textContent = result.toString();
-        /*
         if (!isOverflown(display)) {
             display.textContent = result.toString();
         } else {
             do {
+                display.style.fontSize = "40px";
                 size = display.style.fontSize.replace("px", "");
                 size = size - 10;
                 display.style.fontSize = `${size}px`;
             } while (isOverflown(display));
         }
-        */
         eqKey = false;
         first = display.textContent;
         first = +first;
